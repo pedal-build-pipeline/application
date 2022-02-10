@@ -1,0 +1,19 @@
+{
+  "name": "pbp",
+  "version": "0.0.1",
+  "description": "Pedal Build Pipeline",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "rmdir": "node -e \"var fs = require('fs'); process.argv.slice(1).filter((fpath) => fs.existsSync(fpath)).map((fpath) => fs.rmdirSync(fpath, { recursive: true })); process.exit(0);\"",
+    "clean": "npm run rmdir dist"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.4.2",
+    "parcel": "^2.2.1",
+    "postcss": "^8.4.6",
+    "tailwindcss": "^3.0.18"
+  }
+}
