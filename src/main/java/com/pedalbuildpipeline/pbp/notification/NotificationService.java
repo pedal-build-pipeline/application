@@ -5,10 +5,10 @@ import com.pedalbuildpipeline.pbp.notification.email.templating.exception.EmailT
 import com.pedalbuildpipeline.pbp.notification.email.templating.exception.EmailTemplateRenderingException;
 import com.pedalbuildpipeline.pbp.notification.model.NotificationDetails;
 import com.pedalbuildpipeline.pbp.notification.model.NotificationRequest;
-
 import java.util.UUID;
 
 public interface NotificationService {
   NotificationDetails sendNotification(UUID userId, NotificationRequest notificationRequest)
-          throws UserEmailLookupException, EmailTemplateNotFoundException, EmailTemplateRenderingException;
+      throws UserEmailLookupException, EmailTemplateNotFoundException,
+          EmailTemplateRenderingException;
 }

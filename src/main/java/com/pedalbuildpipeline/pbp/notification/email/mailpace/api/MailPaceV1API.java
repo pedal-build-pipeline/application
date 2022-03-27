@@ -9,9 +9,15 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(value = "mailpace", url = "${notifications.email.api-url}", configuration = FeignConfiguration.class)
+@FeignClient(
+    value = "mailpace",
+    url = "${notifications.email.api-url}",
+    configuration = FeignConfiguration.class)
 @ConditionalOnProperty(value = "notifications.email.provider", havingValue = "mailpace")
 public interface MailPaceV1API {
-  @RequestMapping(method = RequestMethod.POST, value = "/v1/send", produces = MediaType.APPLICATION_JSON_VALUE)
+  @RequestMapping(
+      method = RequestMethod.POST,
+      value = "/v1/send",
+      produces = MediaType.APPLICATION_JSON_VALUE)
   SendEmailResponse sendEmail(SendEmailRequest request);
 }

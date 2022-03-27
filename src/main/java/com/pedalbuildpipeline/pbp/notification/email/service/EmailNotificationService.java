@@ -13,13 +13,12 @@ import com.pedalbuildpipeline.pbp.notification.model.email.EmailAddress;
 import com.pedalbuildpipeline.pbp.notification.model.email.EmailBody;
 import com.pedalbuildpipeline.pbp.user.repo.entity.User;
 import com.pedalbuildpipeline.pbp.user.service.UserService;
+import java.util.Optional;
+import java.util.UUID;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @Transactional

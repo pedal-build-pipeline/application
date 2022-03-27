@@ -3,13 +3,12 @@ package com.pedalbuildpipeline.pbp.notification.email.mailpace.model;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.pedalbuildpipeline.pbp.web.json.InputStreamToBase64StringSerializer;
 import com.pedalbuildpipeline.pbp.web.json.SetToCSVStringSerializer;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.extern.jackson.Jacksonized;
-
 import java.io.InputStream;
 import java.util.List;
 import java.util.Set;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.extern.jackson.Jacksonized;
 
 @Builder
 @Getter

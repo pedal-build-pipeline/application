@@ -2,15 +2,13 @@ package com.pedalbuildpipeline.pbp.event.outbox.service;
 
 import com.pedalbuildpipeline.pbp.event.outbox.annotation.OutboxProcessing;
 import com.pedalbuildpipeline.pbp.event.outbox.model.TaskProcessingResult;
+import java.util.concurrent.Future;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 @ConditionalOnProperty(value = "outbox.polling.enabled", havingValue = "true")
 @Slf4j

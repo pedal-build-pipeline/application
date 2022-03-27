@@ -31,4 +31,5 @@ INSERT
         '{noop}test3',
         '{ROLE_C}',
         TRUE
-    ) ON CONFLICT DO NOTHING;
+    ) ON
+    CONFLICT DO NOTHING;

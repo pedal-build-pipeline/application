@@ -3,11 +3,10 @@ package com.pedalbuildpipeline.pbp.notification.email.service;
 import com.pedalbuildpipeline.pbp.notification.email.entity.SentEmailNotificationRecord;
 import com.pedalbuildpipeline.pbp.notification.email.repo.SentEmailNotificationRecordRepository;
 import com.pedalbuildpipeline.pbp.notification.model.NotificationDetails;
+import java.util.UUID;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-import java.util.UUID;
 
 @Service
 @Transactional

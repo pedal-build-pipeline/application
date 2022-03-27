@@ -1,11 +1,8 @@
 package com.pedalbuildpipeline.pbp.security.user;
 
 import com.pedalbuildpipeline.pbp.user.service.UserService;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

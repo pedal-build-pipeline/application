@@ -8,14 +8,13 @@ import com.pedalbuildpipeline.pbp.event.exception.EventProcessingException;
 import com.pedalbuildpipeline.pbp.event.exception.InvalidEventConfigurationException;
 import com.pedalbuildpipeline.pbp.event.outbox.model.TaskProcessingResult;
 import com.pedalbuildpipeline.pbp.event.outbox.repo.entity.OutboxEntry;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
+import java.util.List;
+import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 /*
  * Heavily inspired by https://github.com/maciejtoporowicz/transactional-outbox-example

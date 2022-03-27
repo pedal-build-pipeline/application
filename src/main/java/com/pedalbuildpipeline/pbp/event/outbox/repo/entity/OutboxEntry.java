@@ -1,6 +1,8 @@
 package com.pedalbuildpipeline.pbp.event.outbox.repo.entity;
 
 import com.pedalbuildpipeline.pbp.event.AggregateType;
+import java.util.UUID;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,9 +10,6 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
 @Table(name = "outbox")

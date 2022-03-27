@@ -1,10 +1,9 @@
 package com.pedalbuildpipeline.pbp.event;
 
-import lombok.RequiredArgsConstructor;
-
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class EventTypeRegistry {

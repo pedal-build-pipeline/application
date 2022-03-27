@@ -1,14 +1,13 @@
 package com.pedalbuildpipeline.pbp.notification.email.entity;
 
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
+import java.util.Map;
+import java.util.UUID;
+import javax.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
-
-import javax.persistence.*;
-import java.util.Map;
-import java.util.UUID;
 
 @Entity
 @Table(name = "sent_email_notification_record")
@@ -40,5 +39,4 @@ public class SentEmailNotificationRecord {
   @Type(type = "jsonb")
   @Column(name = "metadata", columnDefinition = "jsonb")
   private Map<String, Object> metadata;
-
 }

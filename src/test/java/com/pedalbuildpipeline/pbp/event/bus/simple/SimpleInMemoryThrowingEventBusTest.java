@@ -1,14 +1,13 @@
 package com.pedalbuildpipeline.pbp.event.bus.simple;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.Mockito.*;
+
 import com.pedalbuildpipeline.pbp.event.bus.EventListener;
+import java.util.function.Consumer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
-
-import java.util.function.Consumer;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.mockito.Mockito.*;
 
 @SuppressWarnings("unchecked")
 class SimpleInMemoryThrowingEventBusTest {
@@ -53,7 +52,7 @@ class SimpleInMemoryThrowingEventBusTest {
     Consumer<MockEventSuperOne> mockConsumer = (Consumer<MockEventSuperOne>) mock(Consumer.class);
     EventListener<MockEventSuperOne> listener =
         // Don't reduce to lambda -- we lose the type on the arg
-        new EventListener<>() {
+        new EventListener<MockEventSuperOne>() {
           @Override
           public void consume(MockEventSuperOne event) {
             mockConsumer.accept(event);
@@ -82,7 +81,7 @@ class SimpleInMemoryThrowingEventBusTest {
     Consumer<SomeInterface> mockConsumer = (Consumer<SomeInterface>) mock(Consumer.class);
     EventListener<SomeInterface> listener =
         // Don't reduce to lambda -- we lose the type on the arg
-        new EventListener<>() {
+        new EventListener<SomeInterface>() {
           @Override
           public void consume(SomeInterface event) {
             mockConsumer.accept(event);

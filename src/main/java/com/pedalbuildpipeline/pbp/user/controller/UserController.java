@@ -1,5 +1,8 @@
 package com.pedalbuildpipeline.pbp.user.controller;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import com.pedalbuildpipeline.pbp.ResourceType;
 import com.pedalbuildpipeline.pbp.security.authorization.annotation.HasAdmin;
 import com.pedalbuildpipeline.pbp.security.jwt.JwtTokenService;
@@ -8,13 +11,16 @@ import com.pedalbuildpipeline.pbp.user.dto.UserAuthenticationDto;
 import com.pedalbuildpipeline.pbp.user.dto.UserDto;
 import com.pedalbuildpipeline.pbp.user.dto.UserRegistrationDto;
 import com.pedalbuildpipeline.pbp.user.dto.hateoas.UserModelAssembler;
-import com.pedalbuildpipeline.pbp.web.exception.ResourceNotFoundException;
 import com.pedalbuildpipeline.pbp.user.mapping.UserMapper;
 import com.pedalbuildpipeline.pbp.user.repo.entity.User;
 import com.pedalbuildpipeline.pbp.user.service.UserService;
+import com.pedalbuildpipeline.pbp.web.exception.ResourceNotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import java.util.Optional;
+import java.util.UUID;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -27,13 +33,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.util.Optional;
-import java.util.UUID;
-
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/api/users")
@@ -99,9 +98,7 @@ public class UserController {
         userService
             .findByUsername(username)
             .map(userRegistrationModelAssembler::toModel)
-            .orElseThrow(
-                () ->
-                    new ResourceNotFoundException(ResourceType.USER, username)));
+            .orElseThrow(() -> new ResourceNotFoundException(ResourceType.USER, username)));
   }
 
   @GetMapping("/{id}")
@@ -116,8 +113,7 @@ public class UserController {
         userService
             .findUser(id)
             .map(userRegistrationModelAssembler::toModel)
-            .orElseThrow(
-                () -> new ResourceNotFoundException(ResourceType.USER, id.toString())));
+            .orElseThrow(() -> new ResourceNotFoundException(ResourceType.USER, id.toString())));
   }
 
   @GetMapping

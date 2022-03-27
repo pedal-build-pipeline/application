@@ -1,8 +1,7 @@
 package com.pedalbuildpipeline.pbp.web.exception;
 
-import java.net.URI;
-
 import com.pedalbuildpipeline.pbp.ResourceType;
+import java.net.URI;
 import lombok.Getter;
 import org.zalando.problem.AbstractThrowableProblem;
 import org.zalando.problem.Status;
@@ -17,6 +16,7 @@ public class ResourceNotFoundException extends AbstractThrowableProblem {
         TYPE,
         "The given resource was not found",
         Status.NOT_FOUND,
-        String.format("Resource of type '%s' with id '%s' was not found", resourceType.name(), resourceId));
+        String.format(
+            "Resource of type '%s' with id '%s' was not found", resourceType.name(), resourceId));
   }
 }

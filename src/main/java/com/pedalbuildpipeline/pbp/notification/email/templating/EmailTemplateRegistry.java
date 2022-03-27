@@ -3,11 +3,10 @@ package com.pedalbuildpipeline.pbp.notification.email.templating;
 import com.pedalbuildpipeline.pbp.notification.NotificationType;
 import com.pedalbuildpipeline.pbp.notification.email.templating.exception.EmailTemplateNotFoundException;
 import com.pedalbuildpipeline.pbp.notification.email.templating.model.EmailTemplate;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-
 import java.util.Map;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor

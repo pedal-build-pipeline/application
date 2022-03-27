@@ -1,5 +1,9 @@
 package com.pedalbuildpipeline.pbp.user.controller;
 
+import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+
 import com.pedalbuildpipeline.pbp.ComponentTestBase;
 import com.pedalbuildpipeline.pbp.user.dto.AuthenticationResponse;
 import com.pedalbuildpipeline.pbp.user.dto.UserDto;
@@ -10,10 +14,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
-
-import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 class UserControllerIntegrationTest extends ComponentTestBase {
   @Test

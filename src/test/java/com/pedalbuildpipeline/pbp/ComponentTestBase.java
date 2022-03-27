@@ -22,13 +22,12 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @Testcontainers
 @ActiveProfiles("test")
 public class ComponentTestBase extends DatabaseTestBase {
-  @Autowired
-  protected ObjectMapper objectMapper;
+  @Autowired protected ObjectMapper objectMapper;
 
-  @Autowired
-  protected MockMvc mockMvc;
+  @Autowired protected MockMvc mockMvc;
 
-  protected static final String BASE64_JWT_SECRET = Base64.toBase64String(Keys.secretKeyFor(SignatureAlgorithm.HS512).getEncoded());
+  protected static final String BASE64_JWT_SECRET =
+      Base64.toBase64String(Keys.secretKeyFor(SignatureAlgorithm.HS512).getEncoded());
 
   @DynamicPropertySource
   static void jwtProperties(DynamicPropertyRegistry registry) {
@@ -37,7 +36,7 @@ public class ComponentTestBase extends DatabaseTestBase {
 
   protected String json(final Object object) {
     try {
-    return objectMapper.writeValueAsString(object);
+      return objectMapper.writeValueAsString(object);
     } catch (JsonProcessingException e) {
       throw new RuntimeException(e);
     }

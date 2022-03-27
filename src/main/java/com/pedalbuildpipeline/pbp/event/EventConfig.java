@@ -5,11 +5,10 @@ import com.pedalbuildpipeline.pbp.event.bus.EventListener;
 import com.pedalbuildpipeline.pbp.event.bus.simple.SimpleInMemoryThrowingEventBus;
 import com.pedalbuildpipeline.pbp.event.exception.InvalidEventConfigurationException;
 import com.pedalbuildpipeline.pbp.event.model.user.UserCreatedEvent;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
 import java.util.*;
 import java.util.stream.Collectors;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class EventConfig {

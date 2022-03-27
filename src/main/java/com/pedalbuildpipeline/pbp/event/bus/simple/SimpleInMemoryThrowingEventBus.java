@@ -3,7 +3,6 @@ package com.pedalbuildpipeline.pbp.event.bus.simple;
 import com.pedalbuildpipeline.pbp.event.bus.EventBus;
 import com.pedalbuildpipeline.pbp.event.bus.EventListener;
 import com.pedalbuildpipeline.pbp.event.bus.exception.InvalidSubscriberException;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -24,7 +23,8 @@ public class SimpleInMemoryThrowingEventBus implements EventBus {
   public void publish(Object event) {
     Class<?> specificClass = event.getClass();
     do {
-      // Future performance improvement -- it feels like we could cache this looping or do it up front
+      // Future performance improvement -- it feels like we could cache this looping or do it up
+      // front
       // be examining all subscribed-to classes.
       for (EventConsumer eventConsumer : eventListenerRegistry.get(specificClass)) {
         eventConsumer.consume(event);
@@ -45,25 +45,31 @@ public class SimpleInMemoryThrowingEventBus implements EventBus {
         new ConcurrentHashMap<>();
 
     public void add(EventListener<?> eventListener) {
-      Method consumeMethod =
+      List<Method> consumeMethods =
           Arrays.stream(eventListener.getClass().getMethods())
               .filter(
                   method -> method.getName().equals("consume") && method.getParameterCount() == 1)
-              .findFirst()
-              .orElseThrow(
-                  () ->
-                      new InvalidSubscriberException(
-                          "Subscriber of class "
-                              + eventListener.getClass()
-                              + " requires one method named consume that accepts one parameter, but none found."));
+              .toList();
 
+      if (consumeMethods.isEmpty()) {
+        throw new InvalidSubscriberException(
+            "Subscriber of class "
+                + eventListener.getClass()
+                + " requires one method named consume that accepts one parameter, but none found.");
+      }
+
+      Method consumeMethod =
+          consumeMethods.stream()
+              .filter(method -> method.getParameterTypes()[0] != Object.class)
+              .findFirst()
+              .orElse(consumeMethods.get(0));
       Class<?> specificClass = consumeMethod.getParameterTypes()[0];
 
       EventConsumer eventConsumer = new EventConsumer(eventListener, consumeMethod);
 
       subscriberInvokersByEventClass
-              .computeIfAbsent(specificClass, (k) -> new ArrayList<>())
-              .add(eventConsumer);
+          .computeIfAbsent(specificClass, (k) -> new ArrayList<>())
+          .add(eventConsumer);
     }
 
     public List<EventConsumer> get(Class<?> eventClass) {

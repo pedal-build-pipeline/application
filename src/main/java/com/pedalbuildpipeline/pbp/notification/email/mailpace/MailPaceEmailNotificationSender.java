@@ -1,20 +1,19 @@
 package com.pedalbuildpipeline.pbp.notification.email.mailpace;
 
 import com.pedalbuildpipeline.pbp.AppConstants;
+import com.pedalbuildpipeline.pbp.notification.email.mailpace.api.MailPaceV1API;
 import com.pedalbuildpipeline.pbp.notification.email.mailpace.model.SendEmailRequest;
 import com.pedalbuildpipeline.pbp.notification.email.mailpace.model.SendEmailResponse;
-import com.pedalbuildpipeline.pbp.notification.email.mailpace.api.MailPaceV1API;
 import com.pedalbuildpipeline.pbp.notification.email.service.EmailNotificationSender;
 import com.pedalbuildpipeline.pbp.notification.model.NotificationDetails;
 import com.pedalbuildpipeline.pbp.notification.model.email.EmailAddress;
 import com.pedalbuildpipeline.pbp.notification.model.email.EmailBody;
-import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.stereotype.Service;
-
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.stereotype.Service;
 
 @Service
 @ConditionalOnProperty(

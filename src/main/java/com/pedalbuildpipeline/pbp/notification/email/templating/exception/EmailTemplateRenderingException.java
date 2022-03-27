@@ -7,7 +7,8 @@ import lombok.Getter;
 public class EmailTemplateRenderingException extends Exception {
   private NotificationType notificationType;
 
-  public EmailTemplateRenderingException(String message, Throwable cause, NotificationType notificationType) {
+  public EmailTemplateRenderingException(
+      String message, Throwable cause, NotificationType notificationType) {
     super(message, cause);
     this.notificationType = notificationType;
   }

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 public class KeyGeneratorTest {
   @Test
   public void generateKey() {
-    System.out.println(Base64.toBase64String(Keys.secretKeyFor(SignatureAlgorithm.HS512).getEncoded()));
+    System.out.println(
+        Base64.toBase64String(Keys.secretKeyFor(SignatureAlgorithm.HS512).getEncoded()));
   }
 }

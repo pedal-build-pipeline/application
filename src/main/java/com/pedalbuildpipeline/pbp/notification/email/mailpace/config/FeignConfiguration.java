@@ -7,7 +7,8 @@ import org.springframework.context.annotation.Bean;
 @ConditionalOnProperty(value = "notifications.email.provider", havingValue = "mailpace")
 public class FeignConfiguration {
   @Bean
-  public ServerTokenRequestInterceptor serverTokenRequestInterceptor(@Value("notifications.email.credentials") String token) {
+  public ServerTokenRequestInterceptor serverTokenRequestInterceptor(
+      @Value("notifications.email.credentials") String token) {
     return new ServerTokenRequestInterceptor(token);
   }
 }

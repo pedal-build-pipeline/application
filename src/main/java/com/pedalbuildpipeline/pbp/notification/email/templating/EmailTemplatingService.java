@@ -5,11 +5,10 @@ import com.pedalbuildpipeline.pbp.notification.email.templating.exception.EmailT
 import com.pedalbuildpipeline.pbp.notification.email.templating.exception.EmailTemplateRenderingException;
 import com.pedalbuildpipeline.pbp.notification.email.templating.model.EmailTemplate;
 import com.pedalbuildpipeline.pbp.notification.model.email.EmailBody;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
 import java.io.IOException;
 import java.util.Map;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
