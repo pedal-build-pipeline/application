@@ -1,0 +1,8 @@
+features:
+  toggles:
+    users:
+      registration-enabled: true
+
+outbox:
+  polling:
+    enabled: false

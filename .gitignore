@@ -40,4 +40,8 @@ out/
 node/
 dist/
 node_modules/
+package-lock.json
 .parcel-cache/
+
+### mapstruct ###
+src/main/generated

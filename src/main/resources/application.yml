@@ -1,1 +1,29 @@
+spring:
+  web:
+    resources:
+      add-mappings: false
+  mvc:
+    throw-exception-if-no-handler-found: true
+  jpa:
+    hibernate:
+      ddl-auto: validate
 
+server:
+  servlet:
+    encoding:
+      force: true
+
+features:
+  toggles:
+    users:
+      registration-enabled: false
+
+outbox:
+  polling:
+    enabled: true
+    intervalMs: 3000
+
+notifications:
+  email:
+    provider: mailpace
+    api-url: https://app.mailpace.com/api
