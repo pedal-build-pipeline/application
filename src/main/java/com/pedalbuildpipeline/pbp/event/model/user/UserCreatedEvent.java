@@ -5,7 +5,9 @@ import com.pedalbuildpipeline.pbp.event.EventType;
 import com.pedalbuildpipeline.pbp.event.model.Aggregate;
 import com.pedalbuildpipeline.pbp.event.model.BaseEvent;
 
-public record UserCreatedEvent(String id) implements BaseEvent {
+import java.util.UUID;
+
+public record UserCreatedEvent(UUID id) implements BaseEvent {
   @Override
   public EventType getEventType() {
     return EventType.USER_CREATED;

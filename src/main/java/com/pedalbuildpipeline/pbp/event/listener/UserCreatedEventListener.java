@@ -1,6 +1,7 @@
 package com.pedalbuildpipeline.pbp.event.listener;
 
 import com.pedalbuildpipeline.pbp.event.bus.EventListener;
+import com.pedalbuildpipeline.pbp.event.exception.EventProcessingException;
 import com.pedalbuildpipeline.pbp.event.model.user.UserCreatedEvent;
 import com.pedalbuildpipeline.pbp.notification.NotificationService;
 import com.pedalbuildpipeline.pbp.notification.NotificationType;
@@ -28,14 +29,20 @@ public class UserCreatedEventListener implements EventListener<UserCreatedEvent>
     try {
       NotificationDetails notificationDetails =
           notificationService.sendNotification(
-              UUID.fromString(event.getAggregateId()),
-              new NotificationRequest(NotificationType.USER_REGISTRATION, Map.of()));
+              event.id(),
+              new NotificationRequest(
+                  NotificationType.USER_REGISTRATION,
+                  // TODO: Template parameters
+                  Map.of()));
 
       log.info("Successfully sent notification with id {}", notificationDetails.id());
     } catch (UserEmailLookupException
         | EmailTemplateNotFoundException
         | EmailTemplateRenderingException e) {
       log.error("Unable to send notification due to exception", e);
+      // TODO: Better error handling -- maybe we should have a failed message table to enable
+      // retrying?
+      throw new EventProcessingException("Unable to send notification associated to event", e);
     }
   }
 }

@@ -8,6 +8,7 @@ import com.pedalbuildpipeline.pbp.ComponentTestBase;
 import com.pedalbuildpipeline.pbp.user.dto.AuthenticationResponse;
 import com.pedalbuildpipeline.pbp.user.dto.UserDto;
 import com.pedalbuildpipeline.pbp.user.dto.UserRegistrationDto;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
@@ -16,6 +17,8 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 
 class UserControllerIntegrationTest extends ComponentTestBase {
+  @DisplayName(
+      "given a valid user registration, when the user is registered, then a user is created and the user location is returned")
   @Test
   @Order(1)
   public void newUserRegistration() throws Exception {
@@ -35,6 +38,8 @@ class UserControllerIntegrationTest extends ComponentTestBase {
     assertThat(response.getHeader(HttpHeaders.LOCATION)).matches(".*/api/users/[^/]+");
   }
 
+  @DisplayName(
+      "given a user with correct username and password, when the user authenticates, then the id token is returned")
   @Test
   @Order(2)
   public void newUserCanAuthenticate() throws Exception {
@@ -51,6 +56,8 @@ class UserControllerIntegrationTest extends ComponentTestBase {
     assertThatJson(response.getContentAsString()).node("idToken").isString();
   }
 
+  @DisplayName(
+      "given an invalid password, when the user attempts to authenticate, then a 401 is returned")
   @Test
   @Order(3)
   public void invalidPassword401() throws Exception {
@@ -66,6 +73,8 @@ class UserControllerIntegrationTest extends ComponentTestBase {
     assertThat(response.getStatus()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
   }
 
+  @DisplayName(
+      "given a user token, when the self endpoint is called, then the user details corresponding to the token are returned")
   @Test
   @Order(4)
   public void getSelfUser() throws Exception {
@@ -84,6 +93,8 @@ class UserControllerIntegrationTest extends ComponentTestBase {
     assertThat(responseUser.getId()).isNotNull();
   }
 
+  @DisplayName(
+      "given no token, when the self endpoint is called, then an unauthorized error is returned")
   @Test
   @Order(5)
   public void getSelfUserNoToken() throws Exception {

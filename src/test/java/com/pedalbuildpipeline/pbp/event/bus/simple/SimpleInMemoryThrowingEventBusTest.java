@@ -6,6 +6,7 @@ import static org.mockito.Mockito.*;
 import com.pedalbuildpipeline.pbp.event.bus.EventListener;
 import java.util.function.Consumer;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
@@ -18,6 +19,8 @@ class SimpleInMemoryThrowingEventBusTest {
     bus = new SimpleInMemoryThrowingEventBus();
   }
 
+  @DisplayName(
+      "given a direct event subscriber, when the exact event type is published, then the subscriber is called, otherwise it is not")
   @Test
   void registerDirectSubscriber() {
     Consumer<MockEvent> mockConsumer = (Consumer<MockEvent>) mock(Consumer.class);
@@ -47,6 +50,8 @@ class SimpleInMemoryThrowingEventBusTest {
     verify(mockConsumer, times(0)).accept(any());
   }
 
+  @DisplayName(
+      "given a direct event subscriber, when the exact event type or subclass is published, then the subscriber is called, otherwise it is not")
   @Test
   void registerSuperSubscriber() {
     Consumer<MockEventSuperOne> mockConsumer = (Consumer<MockEventSuperOne>) mock(Consumer.class);
@@ -71,11 +76,24 @@ class SimpleInMemoryThrowingEventBusTest {
     assertThat(capturedEvent.getMockEventSuperTwoField()).isEqualTo("two");
     reset(mockConsumer);
 
+    bus.publish(new MockEvent("two", "one", "bottom"));
+
+    mockEventArgumentCaptor = ArgumentCaptor.forClass(MockEventSuperOne.class);
+    verify(mockConsumer).accept(mockEventArgumentCaptor.capture());
+    capturedEvent = mockEventArgumentCaptor.getValue();
+    assertThat(capturedEvent).isInstanceOf(MockEvent.class);
+    assertThat(capturedEvent.getMockEventSuperOneField()).isEqualTo("one");
+    assertThat(capturedEvent.getMockEventSuperTwoField()).isEqualTo("two");
+    assertThat(((MockEvent) capturedEvent).getMockEventField()).isEqualTo("bottom");
+    reset(mockConsumer);
+
     bus.publish(new MockEventSuperTwo("twoOnly"));
 
     verify(mockConsumer, times(0)).accept(any());
   }
 
+  @DisplayName(
+      "given a direct event subscriber, when any event in the hierarchy is published, then the subscriber is called")
   @Test
   void registerInterfaceSubscriber() {
     Consumer<SomeInterface> mockConsumer = (Consumer<SomeInterface>) mock(Consumer.class);
@@ -98,6 +116,17 @@ class SimpleInMemoryThrowingEventBusTest {
     SomeInterface capturedEvent = mockEventArgumentCaptor.getValue();
     assertThat(capturedEvent).isInstanceOf(MockEventSuperTwo.class);
     assertThat(((MockEventSuperTwo) capturedEvent).getMockEventSuperTwoField()).isEqualTo("two");
+    reset(mockConsumer);
+
+    bus.publish(new MockEvent("two", "one", "bottom"));
+
+    mockEventArgumentCaptor = ArgumentCaptor.forClass(MockEvent.class);
+    verify(mockConsumer).accept(mockEventArgumentCaptor.capture());
+    capturedEvent = mockEventArgumentCaptor.getValue();
+    assertThat(capturedEvent).isInstanceOf(MockEvent.class);
+    assertThat(((MockEvent) capturedEvent).getMockEventSuperOneField()).isEqualTo("one");
+    assertThat(((MockEvent) capturedEvent).getMockEventSuperTwoField()).isEqualTo("two");
+    assertThat(((MockEvent) capturedEvent).getMockEventField()).isEqualTo("bottom");
   }
 
   private static class MockEvent extends MockEventSuperOne {

@@ -41,7 +41,7 @@ public class OutboxPoller {
           taskExecutor.submit(outboxProcessorService::processOutbox);
 
       try {
-        moreTasks = result.get().getTasksProcessed() > 0;
+        moreTasks = result.get().tasksProcessed() > 0;
       } catch (Exception e) {
         log.error("Error while polling events", e);
         moreTasks = false;

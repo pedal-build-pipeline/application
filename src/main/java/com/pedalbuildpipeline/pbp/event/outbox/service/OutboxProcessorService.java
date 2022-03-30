@@ -54,7 +54,7 @@ public class OutboxProcessorService {
       entityManager.close();
     }
 
-    return TaskProcessingResult.builder().tasksProcessed(tasksProcessed).build();
+    return new TaskProcessingResult(tasksProcessed);
   }
 
   private Object parseEventPayload(OutboxEntry outboxEntry) {
