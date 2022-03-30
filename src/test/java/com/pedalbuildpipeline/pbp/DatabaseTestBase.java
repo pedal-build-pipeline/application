@@ -1,5 +1,6 @@
 package com.pedalbuildpipeline.pbp;
 
+import org.junit.jupiter.api.parallel.ResourceLock;
 import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -10,6 +11,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 @Testcontainers
 @ContextConfiguration(initializers = {DatabaseTestBase.PostgresInitializer.class})
+@ResourceLock(value = "psqlContainer")
 public class DatabaseTestBase {
   @Container
   public static PostgreSQLContainer<?> postgreSQLContainer =
