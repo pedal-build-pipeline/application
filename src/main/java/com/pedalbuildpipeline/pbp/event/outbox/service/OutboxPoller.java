@@ -1,29 +1,30 @@
 package com.pedalbuildpipeline.pbp.event.outbox.service;
 
-import com.pedalbuildpipeline.pbp.event.outbox.annotation.OutboxProcessing;
 import com.pedalbuildpipeline.pbp.event.outbox.model.TaskProcessingResult;
-import java.util.concurrent.Future;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import java.time.Clock;
+import java.time.Duration;
+import java.time.Instant;
 
 @ConditionalOnProperty(value = "outbox.polling.enabled", havingValue = "true")
 @Slf4j
 @Component
 public class OutboxPoller {
   private final OutboxProcessorService outboxProcessorService;
-  private final AsyncTaskExecutor taskExecutor;
+  private final Clock clock;
   private final long pollingIntervalMs;
 
   public OutboxPoller(
       OutboxProcessorService outboxProcessorService,
-      @OutboxProcessing AsyncTaskExecutor taskExecutor,
+      Clock clock,
       @Value("${outbox.polling.intervalMs}") long pollingIntervalMs) {
     this.outboxProcessorService = outboxProcessorService;
-    this.taskExecutor = taskExecutor;
+    this.clock = clock;
     this.pollingIntervalMs = pollingIntervalMs;
   }
 
@@ -31,25 +32,28 @@ public class OutboxPoller {
   public void pollOutbox() {
     log.info("Begin polling outbox");
 
-    long start = System.nanoTime();
-    long now = System.nanoTime();
+    Instant start = Instant.now(clock);
+    Instant now = Instant.now(clock);
     boolean moreTasks = true;
 
-    while (moreTasks && (now - start) > (pollingIntervalMs - 250)) {
+    long totalTasks = 0;
+    while (moreTasks && Duration.between(start, now).toMillis() < (pollingIntervalMs - 250)) {
       log.info("Continuing polling");
-      Future<TaskProcessingResult> result =
-          taskExecutor.submit(outboxProcessorService::processOutbox);
 
       try {
-        moreTasks = result.get().tasksProcessed() > 0;
+        TaskProcessingResult result = outboxProcessorService.processOutbox();
+
+        moreTasks = result.tasksProcessed() > 0;
+        totalTasks += result.tasksProcessed();
       } catch (Exception e) {
+        // TODO: Something more robust, but we'll have to be able to tell when it's safe to proceed
         log.error("Error while polling events", e);
         moreTasks = false;
       }
 
-      now = System.nanoTime();
+      now = Instant.now(clock);
     }
 
-    log.info("Finished processing outbox");
+    log.info("Finished processing outbox. Total number of tasks processed: {}", totalTasks);
   }
 }
