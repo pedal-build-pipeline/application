@@ -1,6 +1,7 @@
 package com.pedalbuildpipeline.pbp.event.outbox.service;
 
 import com.pedalbuildpipeline.pbp.event.outbox.model.TaskProcessingResult;
+import io.micrometer.core.annotation.Timed;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -29,6 +30,7 @@ public class OutboxPoller {
   }
 
   @Scheduled(fixedRateString = "${outbox.polling.intervalMs}")
+  @Timed
   public void pollOutbox() {
     log.info("Begin polling outbox");
 
