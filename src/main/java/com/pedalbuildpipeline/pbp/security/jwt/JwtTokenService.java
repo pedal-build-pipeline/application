@@ -58,6 +58,7 @@ public class JwtTokenService {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(",")))
         .signWith(key, SignatureAlgorithm.HS512)
+        // TODO: audience? issuer?
         .setExpiration(Date.from(clock.instant().plus(tokenValidMinutes, ChronoUnit.MINUTES)))
         .serializeToJsonWith(jwtJacksonSerializer)
         .compact();

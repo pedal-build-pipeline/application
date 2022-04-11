@@ -11,6 +11,10 @@ public class SetToCSVStringSerializer extends JsonSerializer<Collection<?>> {
   @Override
   public void serialize(Collection<?> value, JsonGenerator gen, SerializerProvider serializers)
       throws IOException {
-    gen.writeString(value.stream().map(Object::toString).collect(Collectors.joining(",")));
+    gen.writeString(
+        value.stream()
+            .map(Object::toString)
+            .map((str) -> str.replaceAll(",", "\\\\,"))
+            .collect(Collectors.joining(",")));
   }
 }

@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.servlet.FilterChain;
@@ -114,5 +115,21 @@ class JwtFilterTest {
   @DisplayName(
       "given a populated and valid bearer token, when the filter is applied, then authentication is set")
   @Test
-  public void validBearerToken() {}
+  public void validBearerToken() throws ServletException, IOException {
+    HttpServletRequest request = mock(HttpServletRequest.class);
+    HttpServletResponse response = mock(HttpServletResponse.class);
+    Authentication authentication = mock(Authentication.class);
+
+    when(request.getHeader(HttpHeaders.AUTHORIZATION)).thenReturn("Bearer abcd1234");
+    when(jwtTokenService.isValid("abcd1234")).thenReturn(true);
+    when(jwtTokenService.toAuthentication("abcd1234")).thenReturn(authentication);
+
+    jwtFilter.doFilterInternal(request, response, filterChain);
+
+    assertThat(SecurityContextHolder.getContext().getAuthentication()).isEqualTo(authentication);
+
+    verify(filterChain).doFilter(request, response);
+    verify(jwtTokenService).isValid("abcd1234");
+    verify(jwtTokenService).toAuthentication("abcd1234");
+  }
 }
