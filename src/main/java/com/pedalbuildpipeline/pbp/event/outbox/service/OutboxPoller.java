@@ -2,15 +2,14 @@ package com.pedalbuildpipeline.pbp.event.outbox.service;
 
 import com.pedalbuildpipeline.pbp.event.outbox.model.TaskProcessingResult;
 import io.micrometer.core.annotation.Timed;
+import java.time.Clock;
+import java.time.Duration;
+import java.time.Instant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-import java.time.Clock;
-import java.time.Duration;
-import java.time.Instant;
 
 @ConditionalOnProperty(value = "outbox.polling.enabled", havingValue = "true")
 @Slf4j

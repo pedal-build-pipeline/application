@@ -1,16 +1,15 @@
 package com.pedalbuildpipeline.pbp.notification.email.templating;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import com.github.jknack.handlebars.Template;
 import com.pedalbuildpipeline.pbp.notification.NotificationType;
 import com.pedalbuildpipeline.pbp.notification.email.templating.exception.EmailTemplateNotFoundException;
 import com.pedalbuildpipeline.pbp.notification.email.templating.model.EmailTemplate;
+import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.Map;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class EmailTemplateRegistryTest {
   private EmailTemplateRegistry emailTemplateRegistry;

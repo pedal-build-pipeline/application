@@ -2,12 +2,19 @@ package com.pedalbuildpipeline.pbp.user.controller;
 
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
-import com.pedalbuildpipeline.pbp.ComponentTestBase;
+import com.pedalbuildpipeline.pbp.OutboxVerifyingTestBase;
+import com.pedalbuildpipeline.pbp.event.AggregateType;
+import com.pedalbuildpipeline.pbp.event.EventType;
+import com.pedalbuildpipeline.pbp.event.outbox.repo.entity.OutboxEntry;
 import com.pedalbuildpipeline.pbp.user.dto.AuthenticationResponse;
 import com.pedalbuildpipeline.pbp.user.dto.UserDto;
 import com.pedalbuildpipeline.pbp.user.dto.UserRegistrationDto;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -16,9 +23,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 
-class UserControllerIntegrationTest extends ComponentTestBase {
+class UserControllerIntegrationTest extends OutboxVerifyingTestBase {
   @DisplayName(
-      "given a valid user registration, when the user is registered, then a user is created and the user location is returned")
+      "given a valid user registration, when the user is registered, then a user is created, the user location is returned, and an outbox entry is created")
   @Test
   @Order(1)
   public void newUserRegistration() throws Exception {
@@ -36,6 +43,20 @@ class UserControllerIntegrationTest extends ComponentTestBase {
 
     assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
     assertThat(response.getHeader(HttpHeaders.LOCATION)).matches(".*/api/users/[^/]+");
+
+    Matcher matcher =
+        Pattern.compile(".*/api/users/(.*)").matcher(response.getHeader(HttpHeaders.LOCATION));
+    assertThat(matcher.matches()).isTrue();
+    String userId = matcher.group(1);
+
+    verifyOutboxEntries(
+        List.of(
+            OutboxEntry.builder()
+                .payload("{\"id\":\"" + userId + "\"}")
+                .aggregate(AggregateType.USER)
+                .eventType(EventType.USER_CREATED.name())
+                .aggregateId(userId)
+                .build()));
   }
 
   @DisplayName(

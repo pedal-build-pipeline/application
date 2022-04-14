@@ -1,5 +1,12 @@
 package com.pedalbuildpipeline.pbp.event.listener;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import com.pedalbuildpipeline.pbp.event.exception.EventProcessingException;
 import com.pedalbuildpipeline.pbp.event.model.user.UserCreatedEvent;
 import com.pedalbuildpipeline.pbp.notification.NotificationService;
@@ -9,6 +16,9 @@ import com.pedalbuildpipeline.pbp.notification.email.templating.exception.EmailT
 import com.pedalbuildpipeline.pbp.notification.email.templating.exception.EmailTemplateRenderingException;
 import com.pedalbuildpipeline.pbp.notification.model.NotificationDetails;
 import com.pedalbuildpipeline.pbp.notification.model.NotificationRequest;
+import java.util.Map;
+import java.util.UUID;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Named;
 import org.junit.jupiter.api.Test;
@@ -20,17 +30,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.Map;
-import java.util.UUID;
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class UserCreatedEventListenerTest {

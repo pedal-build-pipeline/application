@@ -1,8 +1,20 @@
 package com.pedalbuildpipeline.pbp.security.jwt;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.*;
+
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.jackson.io.JacksonSerializer;
 import io.jsonwebtoken.security.Keys;
+import java.time.Clock;
+import java.time.Instant;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import javax.crypto.SecretKey;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Named;
@@ -16,19 +28,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-
-import javax.crypto.SecretKey;
-import java.time.Clock;
-import java.time.Instant;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
 
 class JwtTokenServiceTest {
   private JwtTokenService jwtTokenService;
@@ -63,7 +62,8 @@ class JwtTokenServiceTest {
   @Test
   public void createJwtFromAuthentication() {
     io.jsonwebtoken.Clock jwtClock = mock(io.jsonwebtoken.Clock.class);
-    JwtParser localParser = Jwts.parserBuilder().setSigningKey(secretKey).setClock(jwtClock).build();
+    JwtParser localParser =
+        Jwts.parserBuilder().setSigningKey(secretKey).setClock(jwtClock).build();
 
     when(clock.instant()).thenReturn(Instant.ofEpochSecond(1649619264));
     when(jwtClock.now()).thenReturn(Date.from(Instant.ofEpochSecond(1649619264)));
@@ -129,6 +129,7 @@ class JwtTokenServiceTest {
   public static Stream<Arguments> validationExceptions() {
     return Stream.of(
         Arguments.of(Named.of("JwtException", new MalformedJwtException("Invalid jwt"))),
-        Arguments.of(Named.of("IllegalArgumentException", new IllegalArgumentException("Illegal jwt arg"))));
+        Arguments.of(
+            Named.of("IllegalArgumentException", new IllegalArgumentException("Illegal jwt arg"))));
   }
 }

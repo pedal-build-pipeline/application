@@ -1,5 +1,9 @@
 package com.pedalbuildpipeline.pbp.notification.email.service;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
+
 import com.pedalbuildpipeline.pbp.notification.NotificationType;
 import com.pedalbuildpipeline.pbp.notification.email.config.EmailNotificationsConfiguration;
 import com.pedalbuildpipeline.pbp.notification.email.entity.SentEmailNotificationRecord;
@@ -9,25 +13,18 @@ import com.pedalbuildpipeline.pbp.notification.email.templating.exception.EmailT
 import com.pedalbuildpipeline.pbp.notification.email.templating.exception.EmailTemplateRenderingException;
 import com.pedalbuildpipeline.pbp.notification.model.NotificationDetails;
 import com.pedalbuildpipeline.pbp.notification.model.NotificationRequest;
-import com.pedalbuildpipeline.pbp.notification.model.email.EmailAddress;
 import com.pedalbuildpipeline.pbp.notification.model.email.EmailBody;
 import com.pedalbuildpipeline.pbp.user.repo.entity.User;
 import com.pedalbuildpipeline.pbp.user.service.UserService;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 class EmailNotificationServiceTest {

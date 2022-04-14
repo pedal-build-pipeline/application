@@ -1,5 +1,8 @@
 package com.pedalbuildpipeline.pbp.notification.email.mailpace;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.Mockito.when;
+
 import com.pedalbuildpipeline.pbp.AppConstants;
 import com.pedalbuildpipeline.pbp.notification.email.mailpace.api.MailPaceV1API;
 import com.pedalbuildpipeline.pbp.notification.email.mailpace.model.SendEmailRequest;
@@ -7,6 +10,8 @@ import com.pedalbuildpipeline.pbp.notification.email.mailpace.model.SendEmailRes
 import com.pedalbuildpipeline.pbp.notification.model.NotificationDetails;
 import com.pedalbuildpipeline.pbp.notification.model.email.EmailAddress;
 import com.pedalbuildpipeline.pbp.notification.model.email.EmailBody;
+import java.util.Optional;
+import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,12 +19,6 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.Optional;
-import java.util.Set;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class MailPaceEmailNotificationSenderTest {

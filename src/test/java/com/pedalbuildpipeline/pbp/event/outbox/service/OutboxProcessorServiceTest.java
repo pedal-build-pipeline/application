@@ -1,5 +1,9 @@
 package com.pedalbuildpipeline.pbp.event.outbox.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,23 +14,17 @@ import com.pedalbuildpipeline.pbp.event.exception.InvalidEventConfigurationExcep
 import com.pedalbuildpipeline.pbp.event.model.user.UserCreatedEvent;
 import com.pedalbuildpipeline.pbp.event.outbox.model.TaskProcessingResult;
 import com.pedalbuildpipeline.pbp.event.outbox.repo.entity.OutboxEntry;
+import java.util.List;
+import java.util.Optional;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Query;
-
-import java.util.List;
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class OutboxProcessorServiceTest {
@@ -127,9 +125,7 @@ class OutboxProcessorServiceTest {
   }
 
   @Test
-  public void failsIfBusPublishThrows() {
-
-  }
+  public void failsIfBusPublishThrows() {}
 
   public void publishesIfSingleEventFoundAndParsed() {}
 }

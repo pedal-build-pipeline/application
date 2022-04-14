@@ -1,12 +1,11 @@
 package com.pedalbuildpipeline.pbp.notification.email.mailpace.config;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import feign.RequestTemplate;
+import java.util.UUID;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.UUID;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 class ServerTokenRequestInterceptorTest {
 
@@ -21,6 +20,7 @@ class ServerTokenRequestInterceptorTest {
     interceptor.apply(requestTemplate);
 
     assertThat(requestTemplate.headers().get("MailPace-Server-Token").size()).isEqualTo(1);
-    assertThat(requestTemplate.headers().get("MailPace-Server-Token").iterator().next()).isEqualTo(token);
+    assertThat(requestTemplate.headers().get("MailPace-Server-Token").iterator().next())
+        .isEqualTo(token);
   }
 }

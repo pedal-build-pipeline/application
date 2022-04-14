@@ -11,7 +11,6 @@ import com.pedalbuildpipeline.pbp.notification.email.templating.exception.EmailT
 import com.pedalbuildpipeline.pbp.notification.model.NotificationDetails;
 import com.pedalbuildpipeline.pbp.notification.model.NotificationRequest;
 import java.util.Map;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

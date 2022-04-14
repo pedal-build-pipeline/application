@@ -1,5 +1,9 @@
 package com.pedalbuildpipeline.pbp.user.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
+
 import com.pedalbuildpipeline.pbp.event.model.user.UserCreatedEvent;
 import com.pedalbuildpipeline.pbp.event.outbox.service.OutboxService;
 import com.pedalbuildpipeline.pbp.features.toggles.UserFeatureToggles;
@@ -7,6 +11,8 @@ import com.pedalbuildpipeline.pbp.user.exception.UserRegistrationDisabledExcepti
 import com.pedalbuildpipeline.pbp.user.exception.UsernameAlreadyInUseException;
 import com.pedalbuildpipeline.pbp.user.repo.UserRepository;
 import com.pedalbuildpipeline.pbp.user.repo.entity.User;
+import java.util.Optional;
+import java.util.UUID;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,15 +21,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.Optional;
-import java.util.UUID;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {

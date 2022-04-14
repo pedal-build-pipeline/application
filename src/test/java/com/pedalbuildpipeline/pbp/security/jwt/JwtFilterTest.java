@@ -1,5 +1,13 @@
 package com.pedalbuildpipeline.pbp.security.jwt;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.Mockito.*;
+
+import java.io.IOException;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -12,26 +20,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import java.io.IOException;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.mockito.Mockito.*;
-
 @ExtendWith(MockitoExtension.class)
 class JwtFilterTest {
-  @InjectMocks
-  private JwtFilter jwtFilter;
+  @InjectMocks private JwtFilter jwtFilter;
 
-  @Mock
-  private JwtTokenService jwtTokenService;
+  @Mock private JwtTokenService jwtTokenService;
 
-  @Mock
-  private FilterChain filterChain;
+  @Mock private FilterChain filterChain;
 
   @BeforeEach
   public void beforeEach() {

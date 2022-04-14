@@ -1,16 +1,15 @@
 package com.pedalbuildpipeline.pbp.web.json;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 import com.fasterxml.jackson.core.JsonGenerator;
+import java.io.IOException;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.io.IOException;
-import java.util.List;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class SetToCSVStringSerializerTest {
