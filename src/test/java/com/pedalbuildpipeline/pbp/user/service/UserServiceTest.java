@@ -13,6 +13,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
@@ -32,7 +35,7 @@ class UserServiceTest {
   @Mock private UserFeatureToggles userFeatureToggles;
 
   @DisplayName(
-      "given user registration is disable, when registering a user, an exception is thrown")
+      "given user registration is disabled, when registering a user, an exception is thrown")
   @Test
   public void registerWhileRegistrationDisabled() {
     when(userFeatureToggles.isRegistrationEnabled()).thenReturn(false);
@@ -113,19 +116,60 @@ class UserServiceTest {
 
   @DisplayName("given a username, when finding by username, then the user is returned")
   @Test
-  public void findByUsername() {}
+  public void findByUsername() {
+    User user = mock(User.class);
+
+    when(userRepository.findByUsernameEquals("test")).thenReturn(Optional.of(user));
+
+    Optional<User> maybeUser = userService.findByUsername("test");
+
+    assertThat(maybeUser).isEqualTo(Optional.of(user));
+
+    verify(userRepository).findByUsernameEquals("test");
+  }
 
   @DisplayName("given a user id, when finding by user id, then the user is returned")
   @Test
-  public void findById() {}
+  public void findById() {
+    UUID userId = UUID.randomUUID();
+    User user = mock(User.class);
+
+    when(userRepository.findById(userId)).thenReturn(Optional.of(user));
+
+    Optional<User> maybeUser = userService.findUser(userId);
+
+    assertThat(maybeUser).isEqualTo(Optional.of(user));
+
+    verify(userRepository).findById(userId);
+  }
 
   @DisplayName(
       "given a user search request with username, when searching for users, then the users are searched by username containing and returned")
   @Test
-  public void searchByUsername() {}
+  public void searchByUsername() {
+    Page<User> page = mock(Page.class);
+
+    when(userRepository.findByUsernameContaining("test", PageRequest.of(2, 10))).thenReturn(page);
+
+    Page<User> users = userService.searchUsers(Optional.of("test"), PageRequest.of(2, 10));
+
+    assertThat(users).isEqualTo(page);
+
+    verify(userRepository).findByUsernameContaining("test", PageRequest.of(2, 10));
+  }
 
   @DisplayName(
       "given a user search request without search criteria, when searching for users, then all users are found")
   @Test
-  public void searchNoCriteria() {}
+  public void searchNoCriteria() {
+    Page<User> page = mock(Page.class);
+
+    when(userRepository.findAll(PageRequest.of(2, 10))).thenReturn(page);
+
+    Page<User> users = userService.searchUsers(Optional.empty(), PageRequest.of(2, 10));
+
+    assertThat(users).isEqualTo(page);
+
+    verify(userRepository).findAll(PageRequest.of(2, 10));
+  }
 }
