@@ -55,6 +55,9 @@ public class OutboxPoller {
       now = Instant.now(clock);
     }
 
-    log.info("Finished processing outbox. Total number of tasks processed: {}. Remaining tasks: {}", totalTasks, moreTasks);
+    log.info(
+        "Finished processing outbox. Total number of tasks processed: {}. Remaining tasks: {}",
+        totalTasks,
+        moreTasks);
   }
 }

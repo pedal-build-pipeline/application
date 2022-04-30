@@ -30,10 +30,7 @@ public class UserCreatedEventListener implements EventListener<UserCreatedEvent>
           notificationService.sendNotification(
               event.id(),
               new NotificationRequest(
-                  NotificationType.USER_REGISTRATION,
-                  Map.of(
-                          "username", event.username()
-                  )));
+                  NotificationType.USER_REGISTRATION, Map.of("username", event.username())));
 
       log.info("Successfully sent notification with id {}", notificationDetails.id());
     } catch (UserEmailLookupException

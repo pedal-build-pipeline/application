@@ -81,6 +81,7 @@ class UserServiceTest {
                         && "4321dcba".equals(user.getPassword()))))
         .thenReturn(savedUser);
     when(savedUser.getId()).thenReturn(userId);
+    when(savedUser.getUsername()).thenReturn("test");
 
     User user =
         userService.registerUser(

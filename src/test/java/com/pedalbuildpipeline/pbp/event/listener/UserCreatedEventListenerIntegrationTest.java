@@ -1,22 +1,20 @@
 package com.pedalbuildpipeline.pbp.event.listener;
 
+import static org.mockserver.model.HttpRequest.request;
+import static org.mockserver.model.HttpResponse.response;
+import static org.mockserver.model.JsonBody.json;
+
 import com.pedalbuildpipeline.pbp.OutboxEventListenerTestBase;
 import com.pedalbuildpipeline.pbp.event.model.user.UserCreatedEvent;
 import com.pedalbuildpipeline.pbp.user.repo.UserRepository;
 import com.pedalbuildpipeline.pbp.user.repo.entity.User;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.mockserver.model.JsonBody;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.transaction.Transactional;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-
-import static org.mockserver.model.HttpRequest.request;
-import static org.mockserver.model.HttpResponse.response;
-import static org.mockserver.model.JsonBody.json;
+import javax.transaction.Transactional;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Transactional
 public class UserCreatedEventListenerIntegrationTest extends OutboxEventListenerTestBase {

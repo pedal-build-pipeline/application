@@ -21,14 +21,11 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.testcontainers.containers.MockServerContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-@Testcontainers
 @ActiveProfiles("test")
 @ContextConfiguration(
     initializers = {
@@ -46,14 +43,19 @@ public class ComponentTestBase extends DatabaseTestBase {
   public void beforeEach() {
     mockServerClient = new MockServerClient(mockServer.getHost(), mockServer.getServerPort());
     mockServerClient.reset();
+
+    Runtime.getRuntime().addShutdownHook(new Thread(() -> mockServerClient.stop()));
   }
 
-  @Container
-  public static MockServerContainer mockServer =
-      new MockServerContainer(DockerImageName.parse("mockserver/mockserver:5.13.2"));
+  public static MockServerContainer mockServer;
+
+  static {
+    mockServer = new MockServerContainer(DockerImageName.parse("mockserver/mockserver:5.13.2"));
+    mockServer.start();
+  }
 
   protected static final String BASE64_JWT_SECRET =
-          Base64.toBase64String(Keys.secretKeyFor(SignatureAlgorithm.HS512).getEncoded());
+      Base64.toBase64String(Keys.secretKeyFor(SignatureAlgorithm.HS512).getEncoded());
 
   public static final class MockServerInitializer
       implements ApplicationContextInitializer<ConfigurableApplicationContext> {

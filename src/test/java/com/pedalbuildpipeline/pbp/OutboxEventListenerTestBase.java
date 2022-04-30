@@ -1,28 +1,24 @@
 package com.pedalbuildpipeline.pbp;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import com.pedalbuildpipeline.pbp.event.model.BaseEvent;
 import com.pedalbuildpipeline.pbp.event.outbox.repo.OutboxRepository;
 import com.pedalbuildpipeline.pbp.event.outbox.repo.entity.OutboxEntry;
 import com.pedalbuildpipeline.pbp.event.outbox.service.OutboxPoller;
 import com.pedalbuildpipeline.pbp.event.outbox.service.OutboxProcessorService;
 import com.pedalbuildpipeline.pbp.event.outbox.service.OutboxService;
+import java.time.Clock;
+import java.time.Instant;
+import java.util.List;
+import javax.persistence.EntityManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.support.TransactionTemplate;
-
-import javax.persistence.EntityManager;
-import javax.swing.text.html.parser.Entity;
-import javax.transaction.TransactionManager;
-import java.time.Clock;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.util.List;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class OutboxEventListenerTestBase extends ComponentTestBase {
   protected OutboxPoller outboxPoller;
