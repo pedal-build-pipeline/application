@@ -59,7 +59,7 @@ public class EmailNotificationService implements NotificationService {
                 Optional.ofNullable(
                     emailNotificationsConfiguration.getAddresses().getFrom().getName()),
                 emailNotificationsConfiguration.getAddresses().getFrom().getAddress()),
-            Optional.ofNullable(emailNotificationsConfiguration.getAddresses().getReplyTo())
+            Optional.ofNullable(emailNotificationsConfiguration.getAddresses().getReplyto())
                 .map(
                     (emailAddress) ->
                         new EmailAddress(

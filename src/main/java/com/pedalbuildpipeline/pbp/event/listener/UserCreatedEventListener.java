@@ -31,8 +31,9 @@ public class UserCreatedEventListener implements EventListener<UserCreatedEvent>
               event.id(),
               new NotificationRequest(
                   NotificationType.USER_REGISTRATION,
-                  // TODO: Template parameters
-                  Map.of()));
+                  Map.of(
+                          "username", event.username()
+                  )));
 
       log.info("Successfully sent notification with id {}", notificationDetails.id());
     } catch (UserEmailLookupException

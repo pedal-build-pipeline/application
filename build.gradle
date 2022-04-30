@@ -91,6 +91,8 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
     testImplementation 'org.testcontainers:junit-jupiter'
     testImplementation 'org.testcontainers:postgresql'
+    testImplementation 'org.testcontainers:mockserver'
+    testImplementation 'org.mock-server:mockserver-client-java:5.13.2'
     testImplementation 'net.javacrumbs.json-unit:json-unit-assertj:2.32.0'
 }
 

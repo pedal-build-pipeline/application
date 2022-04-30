@@ -14,6 +14,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceUnit;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,7 @@ import org.springframework.stereotype.Service;
  * Heavily inspired by https://github.com/maciejtoporowicz/transactional-outbox-example
  */
 @Service
+@Slf4j
 public class OutboxProcessorService {
   @PersistenceUnit private EntityManagerFactory entityManagerFactory;
   private EventTypeRegistry eventTypeRegistry;

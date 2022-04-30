@@ -82,7 +82,7 @@ class EmailNotificationServiceTest {
         new EmailNotificationsConfiguration.EmailAddress();
     replyAddress.setAddress("no-reply@test.com");
     replyAddress.setName("no-reply");
-    configuredAddresses.setReplyTo(replyAddress);
+    configuredAddresses.setReplyto(replyAddress);
 
     when(userService.findUser(userId)).thenReturn(Optional.of(user));
     when(emailTemplatingService.renderEmailBodyForNotificationType(

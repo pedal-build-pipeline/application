@@ -1,3 +1,7 @@
+spring:
+  jpa:
+    show-sql: true
+
 features:
   toggles:
     users:
@@ -6,3 +10,13 @@ features:
 outbox:
   polling:
     enabled: false
+
+notifications:
+  email:
+    addresses:
+      from:
+        name: PBP
+        address: pbp@test.com
+      replyto:
+        name: "No Reply"
+        address: no-reply@test.com

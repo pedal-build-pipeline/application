@@ -37,7 +37,7 @@ class UserControllerIntegrationTest extends OutboxVerifyingTestBase {
             .perform(
                 post("/api/users/registration")
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(json(userRegistrationDto)))
+                    .content(asJson(userRegistrationDto)))
             .andReturn()
             .getResponse();
 

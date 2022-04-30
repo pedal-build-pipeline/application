@@ -18,6 +18,7 @@ public interface MailPaceV1API {
   @RequestMapping(
       method = RequestMethod.POST,
       value = "/v1/send",
-      produces = MediaType.APPLICATION_JSON_VALUE)
+      produces = MediaType.APPLICATION_JSON_VALUE,
+      consumes = MediaType.APPLICATION_JSON_VALUE)
   SendEmailResponse sendEmail(SendEmailRequest request);
 }

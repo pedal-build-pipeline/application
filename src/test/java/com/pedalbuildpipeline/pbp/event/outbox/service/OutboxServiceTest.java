@@ -34,7 +34,7 @@ class OutboxServiceTest {
   @Test
   public void createEntryDoesSaveRecord() throws JsonProcessingException {
     UUID userId = UUID.randomUUID();
-    UserCreatedEvent userCreatedEvent = new UserCreatedEvent(userId);
+    UserCreatedEvent userCreatedEvent = new UserCreatedEvent(userId, "username");
 
     OutboxEntry outboxEntry = mock(OutboxEntry.class);
     String serializedEntry = "{}";
@@ -62,7 +62,7 @@ class OutboxServiceTest {
   @Test
   public void createEntryDoesThrowOnSerializationFailure() throws JsonProcessingException {
     UUID userId = UUID.randomUUID();
-    UserCreatedEvent userCreatedEvent = new UserCreatedEvent(userId);
+    UserCreatedEvent userCreatedEvent = new UserCreatedEvent(userId, "username");
 
     JsonProcessingException exception = mock(JsonProcessingException.class);
 

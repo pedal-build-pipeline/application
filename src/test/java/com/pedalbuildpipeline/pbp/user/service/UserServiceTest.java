@@ -109,7 +109,8 @@ class UserServiceTest {
             argThat(
                 (event) ->
                     event instanceof UserCreatedEvent
-                        && userId.equals(((UserCreatedEvent) event).id())));
+                        && userId.equals(((UserCreatedEvent) event).id())
+                        && "test".equals(((UserCreatedEvent) event).username())));
   }
 
   @DisplayName("given a username, when finding by username, then the user is returned")

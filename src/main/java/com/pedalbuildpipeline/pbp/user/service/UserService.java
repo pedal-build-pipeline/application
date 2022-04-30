@@ -45,7 +45,8 @@ public class UserService {
                 .build();
 
         User createdUser = userRepository.save(userToSave);
-        outboxService.createEntry(new UserCreatedEvent(createdUser.getId()));
+        outboxService.createEntry(
+            new UserCreatedEvent(createdUser.getId(), createdUser.getUsername()));
 
         return createdUser;
       } else {

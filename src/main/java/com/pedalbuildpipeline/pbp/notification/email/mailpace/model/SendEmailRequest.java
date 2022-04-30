@@ -25,21 +25,17 @@ public class SendEmailRequest {
   @JsonSerialize(using = SetToCSVStringSerializer.class)
   private Set<String> cc;
 
-  @JsonSerialize(using = SetToCSVStringSerializer.class, as = String.class)
+  @JsonSerialize(using = SetToCSVStringSerializer.class)
   private Set<String> bcc;
 
   private String subject;
 
-  @JsonSerialize(using = SetToCSVStringSerializer.class, as = String.class)
   private String replyto;
 
-  @JsonSerialize(using = SetToCSVStringSerializer.class, as = String.class)
+  @JsonSerialize(using = SetToCSVStringSerializer.class)
   private Set<String> list_unsubscribe;
 
-  @JsonSerialize(
-      contentUsing = InputStreamToBase64StringSerializer.class,
-      as = List.class,
-      contentAs = String.class)
+  @JsonSerialize(contentUsing = InputStreamToBase64StringSerializer.class)
   private List<InputStream> attachments;
 
   private Set<String> tags;

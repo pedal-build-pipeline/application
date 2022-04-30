@@ -19,7 +19,7 @@ public class EmailNotificationsConfiguration {
   @Data
   public static final class Addresses {
     @NotNull private EmailAddress from;
-    private EmailAddress replyTo;
+    private EmailAddress replyto;
   }
 
   @Data

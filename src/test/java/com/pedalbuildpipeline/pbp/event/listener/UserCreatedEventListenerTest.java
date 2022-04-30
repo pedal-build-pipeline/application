@@ -44,7 +44,7 @@ class UserCreatedEventListenerTest {
       throws EmailTemplateRenderingException, EmailTemplateNotFoundException,
           UserEmailLookupException {
     UUID userId = UUID.randomUUID();
-    UserCreatedEvent userCreatedEvent = new UserCreatedEvent(userId);
+    UserCreatedEvent userCreatedEvent = new UserCreatedEvent(userId, "username");
 
     UUID notificationId = UUID.randomUUID();
     NotificationDetails notificationDetails =
@@ -63,7 +63,7 @@ class UserCreatedEventListenerTest {
     assertThat(notificationRequestArgumentCaptor.getValue().notificationType())
         .isEqualTo(NotificationType.USER_REGISTRATION);
     assertThat(notificationRequestArgumentCaptor.getValue().templateParameters())
-        .isEqualTo(Map.of());
+        .isEqualTo(Map.of("username", "username"));
   }
 
   @DisplayName(
@@ -74,7 +74,7 @@ class UserCreatedEventListenerTest {
       throws EmailTemplateRenderingException, EmailTemplateNotFoundException,
           UserEmailLookupException {
     UUID userId = UUID.randomUUID();
-    UserCreatedEvent userCreatedEvent = new UserCreatedEvent(userId);
+    UserCreatedEvent userCreatedEvent = new UserCreatedEvent(userId, "username");
 
     when(notificationService.sendNotification(eq(userId), any())).thenThrow(e);
 
@@ -90,7 +90,7 @@ class UserCreatedEventListenerTest {
     assertThat(notificationRequestArgumentCaptor.getValue().notificationType())
         .isEqualTo(NotificationType.USER_REGISTRATION);
     assertThat(notificationRequestArgumentCaptor.getValue().templateParameters())
-        .isEqualTo(Map.of());
+        .isEqualTo(Map.of("username", "username"));
   }
 
   public static Stream<Arguments> notificationExceptions() {
