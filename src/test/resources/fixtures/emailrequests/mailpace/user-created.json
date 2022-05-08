@@ -1,7 +1,5 @@
 {
   "to": "test@test.com",
   "from": "PBP <pbp@test.com>",
-  "replyto": "No Reply <no-reply@test.com>",
-  "htmlbody": "<p>Welcome, test</p>",
-  "textbody": "Welcome, test"
+  "replyto": "No Reply <no-reply@test.com>"
 }

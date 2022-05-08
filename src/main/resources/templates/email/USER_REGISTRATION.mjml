@@ -1,0 +1,23 @@
+<mjml>
+    <mj-body>
+        <mj-section>
+            <mj-column>
+
+                <mj-image width="100px" src="{{{links.logo}}}"></mj-image>
+
+                <mj-divider border-color="#f97316"></mj-divider>
+
+                <mj-text align="center" color="#71717a" font-size="20px" font-family="helvetica">Welcome to Pedal Build
+                    Pipeline, {{{username}}}! In order to finish setting up your account, please click the button below.
+                </mj-text>
+
+                <mj-button href="{{{links.verificationUrl}}}">Verify Email</mj-button>
+
+                <mj-text align="center" color="#71717a" font-family="helvetica">If you did not sign up for Pedal Build
+                    Pipeline, please ignore this email.
+                </mj-text>
+
+            </mj-column>
+        </mj-section>
+    </mj-body>
+</mjml>

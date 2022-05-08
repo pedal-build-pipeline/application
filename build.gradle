@@ -4,12 +4,17 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id 'jacoco'
+    id 'com.github.node-gradle.node' version '3.2.1'
 }
 
 group = 'com.pedalbuildpipeline'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 targetCompatibility = '17'
+
+node {
+    download = true
+}
 
 jacocoTestCoverageVerification {
     violationRules {
@@ -110,6 +115,20 @@ tasks.named('test') {
 
 tasks.named('check') {
     dependsOn jacocoTestCoverageVerification
+}
+
+task installMjmlDependencies(type: NpmTask) {
+    args = ['install', 'mjml', 'html-to-text', 'glob']
+}
+
+task compileMjmlTemplates(type: NodeTask) {
+    dependsOn tasks.installMjmlDependencies
+
+    script = file('mjml_build.mjs')
+}
+
+tasks.named('processResources') {
+    dependsOn tasks.compileMjmlTemplates
 }
 
 jacocoTestReport {

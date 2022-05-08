@@ -45,3 +45,12 @@ package-lock.json
 
 ### mapstruct ###
 src/main/generated
+
+### node ###
+node_modules/
+package.json
+package-lock.json
+
+### generated templates ###
+src/main/resources/templates/email/**/*.html.hbs
+src/main/resources/templates/email/**/*.text.hbs
