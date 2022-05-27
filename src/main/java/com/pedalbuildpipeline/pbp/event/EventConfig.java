@@ -4,7 +4,7 @@ import com.pedalbuildpipeline.pbp.event.bus.EventBus;
 import com.pedalbuildpipeline.pbp.event.bus.EventListener;
 import com.pedalbuildpipeline.pbp.event.bus.simple.SimpleInMemoryThrowingEventBus;
 import com.pedalbuildpipeline.pbp.event.exception.InvalidEventConfigurationException;
-import com.pedalbuildpipeline.pbp.event.model.user.UserCreatedEvent;
+import com.pedalbuildpipeline.pbp.user.event.UserCreatedEvent;
 import java.util.*;
 import java.util.stream.Collectors;
 import org.springframework.context.annotation.Bean;

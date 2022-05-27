@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
-import com.pedalbuildpipeline.pbp.event.model.user.UserCreatedEvent;
+import com.pedalbuildpipeline.pbp.user.event.UserCreatedEvent;
 import com.pedalbuildpipeline.pbp.event.outbox.service.OutboxService;
 import com.pedalbuildpipeline.pbp.features.toggles.UserFeatureToggles;
 import com.pedalbuildpipeline.pbp.user.exception.UserRegistrationDisabledException;

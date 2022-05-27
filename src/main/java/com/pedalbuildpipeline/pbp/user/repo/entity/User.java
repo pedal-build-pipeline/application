@@ -1,6 +1,9 @@
 package com.pedalbuildpipeline.pbp.user.repo.entity;
 
+import com.pedalbuildpipeline.pbp.project.repo.entity.Project;
 import com.vladmihalcea.hibernate.type.array.StringArrayType;
+
+import java.util.Set;
 import java.util.UUID;
 import javax.persistence.*;
 import lombok.*;
@@ -40,4 +43,8 @@ public class User {
 
   @Column(name = "enabled")
   private boolean enabled;
+
+  @OneToMany
+  @ToString.Exclude
+  private Set<Project> projects;
 }

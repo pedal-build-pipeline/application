@@ -2,7 +2,7 @@ package com.pedalbuildpipeline.pbp.event.listener;
 
 import com.pedalbuildpipeline.pbp.event.bus.EventListener;
 import com.pedalbuildpipeline.pbp.event.exception.EventProcessingException;
-import com.pedalbuildpipeline.pbp.event.model.user.UserCreatedEvent;
+import com.pedalbuildpipeline.pbp.user.event.UserCreatedEvent;
 import com.pedalbuildpipeline.pbp.notification.NotificationService;
 import com.pedalbuildpipeline.pbp.notification.NotificationType;
 import com.pedalbuildpipeline.pbp.notification.email.exception.UserEmailLookupException;

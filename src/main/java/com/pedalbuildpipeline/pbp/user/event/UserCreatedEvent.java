@@ -1,4 +1,4 @@
-package com.pedalbuildpipeline.pbp.event.model.user;
+package com.pedalbuildpipeline.pbp.user.event;
 
 import com.pedalbuildpipeline.pbp.event.AggregateType;
 import com.pedalbuildpipeline.pbp.event.EventType;

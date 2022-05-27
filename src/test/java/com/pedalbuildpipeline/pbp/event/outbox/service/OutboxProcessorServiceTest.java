@@ -11,7 +11,7 @@ import com.pedalbuildpipeline.pbp.event.EventTypeRegistry;
 import com.pedalbuildpipeline.pbp.event.bus.EventBus;
 import com.pedalbuildpipeline.pbp.event.exception.EventProcessingException;
 import com.pedalbuildpipeline.pbp.event.exception.InvalidEventConfigurationException;
-import com.pedalbuildpipeline.pbp.event.model.user.UserCreatedEvent;
+import com.pedalbuildpipeline.pbp.user.event.UserCreatedEvent;
 import com.pedalbuildpipeline.pbp.event.outbox.model.TaskProcessingResult;
 import com.pedalbuildpipeline.pbp.event.outbox.repo.entity.OutboxEntry;
 import java.util.List;

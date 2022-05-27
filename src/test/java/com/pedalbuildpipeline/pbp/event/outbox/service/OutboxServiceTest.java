@@ -9,7 +9,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pedalbuildpipeline.pbp.event.AggregateType;
 import com.pedalbuildpipeline.pbp.event.EventType;
-import com.pedalbuildpipeline.pbp.event.model.user.UserCreatedEvent;
+import com.pedalbuildpipeline.pbp.user.event.UserCreatedEvent;
 import com.pedalbuildpipeline.pbp.event.outbox.exception.EventStorageException;
 import com.pedalbuildpipeline.pbp.event.outbox.repo.OutboxRepository;
 import com.pedalbuildpipeline.pbp.event.outbox.repo.entity.OutboxEntry;

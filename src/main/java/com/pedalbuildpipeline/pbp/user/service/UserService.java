@@ -1,6 +1,6 @@
 package com.pedalbuildpipeline.pbp.user.service;
 
-import com.pedalbuildpipeline.pbp.event.model.user.UserCreatedEvent;
+import com.pedalbuildpipeline.pbp.user.event.UserCreatedEvent;
 import com.pedalbuildpipeline.pbp.event.outbox.service.OutboxService;
 import com.pedalbuildpipeline.pbp.features.toggles.UserFeatureToggles;
 import com.pedalbuildpipeline.pbp.user.exception.UserRegistrationDisabledException;

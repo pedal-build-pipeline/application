@@ -7,7 +7,7 @@ import static org.mockserver.model.HttpResponse.response;
 import static org.mockserver.model.JsonBody.json;
 
 import com.pedalbuildpipeline.pbp.OutboxEventListenerTestBase;
-import com.pedalbuildpipeline.pbp.event.model.user.UserCreatedEvent;
+import com.pedalbuildpipeline.pbp.user.event.UserCreatedEvent;
 import com.pedalbuildpipeline.pbp.user.repo.UserRepository;
 import com.pedalbuildpipeline.pbp.user.repo.entity.User;
 import java.io.IOException;
